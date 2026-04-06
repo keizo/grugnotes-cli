@@ -1,0 +1,63 @@
+[build-system]
+requires = ["hatchling>=1.24.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+ignore-vcs = true
+
+[project]
+name = "grugnotes-cli"
+version = "0.1.0"
+description = "CLI for Grug Notes API"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+  { name = "Keizo Gates", email = "keizo@grugnotes.com" },
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
+dependencies = [
+  "click>=8.1.7",
+  "diff-match-patch>=20181111",
+  "emoji>=2.8.0",
+  "httpx>=0.27.0",
+  "watchdog>=4.0.0",
+  "xxhash>=3.0.0",
+]
+
+[project.urls]
+Homepage = "https://grugnotes.com"
+
+[project.scripts]
+grugnotes = "grugnotes_cli.main:cli"
+
+[tool.hatch.build.targets.wheel]
+packages = ["grugnotes_cli"]
+exclude = ["grugnotes_cli/tests"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"AGENTS.md" = "AGENTS.md"
+
+[tool.hatch.build.targets.sdist]
+# Hatchling force-includes the nearest VCS exclusion file for sdists, so keep a
+# minimal local `.gitignore` in this directory rather than inheriting the
+# parent repository's ignore rules.
+only-include = [
+  "AGENTS.md",
+  "grugnotes_cli",
+  "README.md",
+  "LICENSE",
+  "pyproject.toml",
+]
+exclude = ["grugnotes_cli/tests", ".gitignore", "/.gitignore", "**/.gitignore", "**/.*"]

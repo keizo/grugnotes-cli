@@ -1,0 +1,6 @@
+# Keep this local so Hatchling's sdist builder does not pull in the repo-root
+# .gitignore from the parent project.
+dist/
+.pytest_cache/
+grugnotes_cli/__pycache__/
+grugnotes_cli/tests/__pycache__/
