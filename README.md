@@ -25,25 +25,6 @@ if you need different access.
 - Sync commands refuse to operate on symlinked sync directories or directories that contain symlinked sync paths or prompt metadata directories.
 - `sync init` and `sync reset` write a local `.gitignore` covering `.grugnotes/`, `.grugnotes.json`, `.prompt.json`, and `*.conflict.md`.
 
-## Testing
-
-On Apple Silicon, run CLI tests under the x86_64 virtualenv so the `xxhash` wheel
-matches the interpreter architecture:
-
-```bash
-source activate.sh && arch -x86_64 python -m pytest cli/grugnotes_cli/tests -q
-```
-
-## Upgrade Note
-
-Legacy `.grugnotes.json` entries that used `sha256:...` synced hashes are migrated
-in place to xxhash as files are scanned (`sync status`, `sync push`, `sync pull`,
-or `sync watch` startup). This avoids a one-time "push everything" after upgrade.
-
-Legacy state entries with `deleted_remotely=true` are also migrated. During migration:
-- unchanged local tracked files are removed;
-- locally edited tracked files are moved to `.grugnotes/trash/...`.
-
 ## Commands
 
 ### notes — list notes
